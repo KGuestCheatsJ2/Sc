@@ -1,4 +1,4 @@
--- This script was generated using the MoonVeil Obfuscator v1.4.5 [https://moonveil.cc]
+-- why u here skid?
 
 local Uk,Dc,ym,dc=type,getmetatable,bit32.bxor,pairs
 local xg,bi,xe,Af,fn,R,ek,Hh,Fg,rh,Rd,ef,Xi,qm,ia,Wj;
