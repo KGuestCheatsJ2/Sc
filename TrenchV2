@@ -1,2 +1,2 @@
 -- why u here skid
-loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/f194f8a05eb939a9455ea2ed4122a9c82b7ac343e0229e0af1de757d82a329b6/download"))()
+loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/c7ceff74cbd03913ae6e011b3b037a9e52bd4deef741a191bfab223fb5f3447e/download"))()
