@@ -1,0 +1,54 @@
+local Players = game:GetService("Players")
+
+local function applyESP(char, player)
+    if not char then return end
+
+    if char:FindFirstChild("ESP_Highlight") then return end
+
+    --=== HIGHLIGHT ===--
+    local highlight = Instance.new("Highlight")
+    highlight.Name = "ESP_Highlight"
+    highlight.FillColor = Color3.fromRGB(255, 255, 255)
+    highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+    highlight.FillTransparency = 0.70
+    highlight.OutlineTransparency = 0.5
+    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    highlight.Parent = char
+
+    --=== NAME ===--
+    local head = char:FindFirstChild("Head")
+    if head and not head:FindFirstChild("NameESP") then
+        local billboard = Instance.new("BillboardGui")
+        billboard.Name = "NameESP"
+        billboard.Size = UDim2.new(0, 120, 0, 25) -- smaller
+        billboard.AlwaysOnTop = true
+        billboard.StudsOffset = Vector3.new(0, 2.5, 0)
+        billboard.Parent = head
+
+        local label = Instance.new("TextLabel")
+        label.Size = UDim2.new(1, 0, 1, 0)
+        label.BackgroundTransparency = 1
+        label.Text = player.Name
+        label.TextColor3 = Color3.fromRGB(255, 255, 255)
+        label.TextStrokeTransparency = 0.3
+        label.TextScaled = true
+        label.Font = Enum.Font.GothamBold
+        label.Parent = billboard
+    end
+end
+
+local function onCharacter(player)
+    player.CharacterAdded:Connect(function(char)
+        applyESP(char, player)
+    end)
+
+    if player.Character then
+        applyESP(player.Character, player)
+    end
+end
+
+for _, plr in ipairs(Players:GetPlayers()) do
+    onCharacter(plr)
+end
+
+Players.PlayerAdded:Connect(onCharacter)
