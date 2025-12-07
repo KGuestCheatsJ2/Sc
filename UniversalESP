@@ -10,8 +10,8 @@ local function applyESP(char, player)
     highlight.Name = "ESP_Highlight"
     highlight.FillColor = Color3.fromRGB(255, 255, 255)
     highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
-    highlight.FillTransparency = 0.55
-    highlight.OutlineTransparency = 0.5
+    highlight.FillTransparency = 0.5
+    highlight.OutlineTransparency = 0.45
     highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
     highlight.Parent = char
 
