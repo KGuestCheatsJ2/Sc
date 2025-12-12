@@ -35,6 +35,7 @@ local function applyESP(char, player)
     label.TextSize = 12 -- smaller text
     label.Font = Enum.Font.GothamBold
     label.Parent = billboard
+    end
 end
 
 local function onCharacter(player)
