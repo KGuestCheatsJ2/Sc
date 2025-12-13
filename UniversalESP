@@ -1,3 +1,5 @@
+print("If U Gonna Get The Source Then Atleast Give Credits")
+
 local Players = game:GetService("Players")
 
 local function applyESP(char, player)
