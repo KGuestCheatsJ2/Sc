@@ -1,0 +1,37 @@
+local Players = game:GetService("Players")
+local Player = Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+local HRP = Character:WaitForChild("HumanoidRootPart")
+local HUM = Character:WaitForChild("Humanoid")
+
+local TeslaLab = workspace:WaitForChild("TeslaLab")
+local Generator = TeslaLab:WaitForChild("Generator"):FindFirstChildWhichIsA("BasePart")
+if not Generator then return end
+
+local genPos = Generator.Position
+HRP.CFrame = CFrame.new(genPos + Vector3.new(0, 5, 0))
+task.wait(1)
+
+local RuntimeItems = workspace:WaitForChild("RuntimeItems")
+local closestSeat, minDist = nil, math.huge
+for _, obj in ipairs(RuntimeItems:GetDescendants()) do
+    if (obj:IsA("Seat") or obj:IsA("VehicleSeat")) and obj.Occupant == nil then
+        local dist = (obj.Position - genPos).Magnitude
+        if dist < minDist then
+            minDist = dist
+            closestSeat = obj
+        end
+    end
+end
+
+if not closestSeat then return end
+
+local deadline = tick() + 3
+while tick() < deadline and (closestSeat.Occupant == nil or closestSeat.Occupant ~= HUM) and not HUM.Sit do
+    HRP.CFrame = closestSeat.CFrame + Vector3.new(0, 3, 0)
+    closestSeat.Disabled = false
+    closestSeat.CanTouch = true
+    closestSeat:Sit(HUM)
+    HUM.Sit = true
+    task.wait(0.1)
+end
