@@ -9,20 +9,19 @@ local function applyESP(char, player)
     --=== SKIP LOCALPLAYER ===--
     if player == LocalPlayer then return end
 
-    if char:FindFirstChild("ESP_Highlight") then return end
-
-    --=== HIGHLIGHT ===--
-    local highlight = Instance.new("Highlight")
-    highlight.Name = "ESP_Highlight"
-    highlight.FillColor = Color3.fromRGB(255, 255, 255)
-    highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
-    highlight.FillTransparency = 0.5
-    highlight.OutlineTransparency = 0.45
-    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
-    highlight.Parent = char
+    if not char:FindFirstChild("ESP_Highlight") then
+        local highlight = Instance.new("Highlight")
+        highlight.Name = "ESP_Highlight"
+        highlight.FillColor = Color3.fromRGB(255, 255, 255)
+        highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+        highlight.FillTransparency = 0.5
+        highlight.OutlineTransparency = 0.45
+        highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+        highlight.Parent = char
+    end
 
     --=== NAME ===--
-    local head = char:FindFirstChild("Head")
+    local head = char:WaitForChild("Head", 5)
     if head and not head:FindFirstChild("NameESP") then
         local billboard = Instance.new("BillboardGui")
         billboard.Name = "NameESP"
@@ -46,6 +45,7 @@ end
 
 local function onCharacter(player)
     player.CharacterAdded:Connect(function(char)
+        char:WaitForChild("Head", 5) -- ensures head exists before ESP
         applyESP(char, player)
     end)
 
